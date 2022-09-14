@@ -35,7 +35,8 @@ def check_tasks():
     for task in tasks:
         if task.status != TASK_STATUS.CLOSED:
             developer_estimation = ask_developer_for_estimation(task)
-            real_estimation = register_developer_estimation_for_task(task, developer_estimation)
+            real_estimation = developer_estimation / 5.0
+            register_estimation_for_task(task, real_estimation)
 
             current_hour = datetime.now().hour
             if current_hour + (real_estimation / 60) > END_OF_THE_DAY_HOUR:
@@ -59,10 +60,9 @@ def ask_developer_for_estimation(task):
     return estimation_in_minutes
 
 
-def register_developer_estimation_for_task(task, developer_estimation):
-    real_estimation = developer_estimation / 5.0
+def register_developer_estimation_for_task(task, estimation):
     ## TODO: call software API to register real estimation
-    return real_estimation
+    pass
 
 
 def order_pizza():
